@@ -43,7 +43,7 @@ end
 
 NULL_PLACEHOLDER = "$%&?"; % Should have 4 characters for correct line breaks.
 
-yaml.initSnakeYaml()
+yaml.init_snakeyaml()
 import org.yaml.snakeyaml.*;
 
 try
