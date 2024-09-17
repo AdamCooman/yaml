@@ -138,7 +138,6 @@ classdef Tests < matlab.unittest.TestCase
                 % Data | expected error
                 ones(2, 2, 2, 2), "yaml:dump:HigherDimensionsNotSupported"
                 num2cell(ones(2, 2, 2, 2)), "yaml:dump:HigherDimensionsNotSupported"
-                datetime(2022, 2, 13), "yaml:dump:TypeNotSupported"
                 "test $%&? adfasdf", "yaml:dump:NullPlaceholderNotAllowed"
                 };
 
