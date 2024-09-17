@@ -43,7 +43,7 @@ end
 
 NULL_PLACEHOLDER = "$%&?"; % Should have 4 characters for correct line breaks.
 
-initSnakeYaml
+yaml.initSnakeYaml()
 import org.yaml.snakeyaml.*;
 
 try
@@ -136,13 +136,6 @@ result = string(result).replace(NULL_PLACEHOLDER, "null");
             end
         else
             error("yaml:dump:HigherDimensionsNotSupported", "Arrays with more than three dimensions are not supported. Use nested cells instead.")
-        end
-    end
-
-    function initSnakeYaml
-        snakeYamlFile = fullfile(fileparts(mfilename('fullpath')), 'snakeyaml', 'snakeyaml-1.30.jar');
-        if ~ismember(snakeYamlFile, javaclasspath('-dynamic'))
-            javaaddpath(snakeYamlFile);
         end
     end
 

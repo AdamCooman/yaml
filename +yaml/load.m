@@ -36,7 +36,7 @@ arguments
     options.ConvertToArray (1, 1) logical = false
 end
 
-initSnakeYaml
+yaml.init_snakeyaml()
 import org.yaml.snakeyaml.*;
 try
     rootNode = Yaml().load(s);
@@ -117,13 +117,6 @@ end
             result = vertcat(result{:});
         end
     end
-end
-
-function initSnakeYaml
-snakeYamlFile = fullfile(fileparts(mfilename('fullpath')), 'snakeyaml', 'snakeyaml-1.30.jar');
-if ~ismember(snakeYamlFile, javaclasspath('-dynamic'))
-    javaaddpath(snakeYamlFile);
-end
 end
 
 function result = elementsHaveConsistentType(cell_)
