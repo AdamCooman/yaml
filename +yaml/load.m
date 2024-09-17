@@ -66,7 +66,16 @@ end
             case "logical"
                 result = logical(node);
             case "java.util.LinkedHashMap"
-                result = convertMap(node);
+                keys = string(node.keySet());
+                keys = keys.extractBetween(2,strlength(keys)-1);
+                keys = keys.split(",");
+                values = cell(node.values().toArray());
+                keys = matlab.lang.makeValidName(keys);
+                keys = matlab.lang.makeUniqueStrings(keys);
+                result = struct();
+                for ind = 1 : numel(values)
+                    result.(keys(ind)) = convert(values{ind});
+                end
             case "java.util.ArrayList"
                 result = convertList(node);
             case "java.util.Date"
@@ -79,25 +88,13 @@ end
         end
     end
 
-    function result = convertMap(map)
-        result = struct();
-
-        keys = string(map.keySet().toArray())';
-        fieldNames = matlab.lang.makeValidName(keys);
-        fieldNames = matlab.lang.makeUniqueStrings(fieldNames);
-
-        for i = 1:map.size()
-            value = map.get(java.lang.String(keys(i)));
-            result.(fieldNames(i)) = convert(value);
-        end
-    end
 
     function result = convertList(list)
 
         % Convert Java list to cell array.
-        result = cell(1, list.size());
-        for i = 1:list.size()
-            result{i} = convert(list.get(i - 1));
+        result = cell(list.toArray())';
+        for ind = 1 : numel(result)
+            result{ind} = convert(result{ind});
         end
 
         if ~options.ConvertToArray
