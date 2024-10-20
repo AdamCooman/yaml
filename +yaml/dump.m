@@ -72,6 +72,9 @@ function result = convert(data)
         result = convertIntegerOrLogical(data);
     elseif isstring(data) || (ischar(data) && isrow(data))
         result = data;
+    elseif isdatetime(data)
+        data.Format = "uuuu-MM-dd'T'HH:mm:ss.SSS";
+        result = string(data);
     else
         error("yaml:dump:TypeNotSupported", "Data type '%s' is not supported.", class(data))
     end
