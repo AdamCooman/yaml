@@ -81,6 +81,9 @@ result = string(result).replace(NULL_PLACEHOLDER, "null");
             result = java.lang.Boolean(data);
         elseif isstring(data)
             result = convertString(data);
+        elseif isdatetime(data)
+            data.Format = "uuuu-MM-dd'T'HH:mm:ss.SSS";
+            result = java.lang.String(string(data));
         elseif yaml.isNull(data)
             result = java.lang.String(NULL_PLACEHOLDER);
         else
